@@ -1,0 +1,40 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "CMake",
+            "type": "shell",
+            "command": "cmake",
+            "options": {
+                "cwd": "${workspaceRoot}"
+            },
+            "args": [
+                "-GNinja",
+                "-Bbuild",
+                "-DCMAKE_C_COMPILER=clang",
+                "-DCMAKE_CXX_COMPILER=clang++",
+                "${workspaceRoot}"
+            ]
+        }, 
+        {
+            "label": "Ninja",
+            "type": "shell",
+            "options": {
+                "cwd": "${workspaceRoot}/build"
+            },
+            "command": "ninja",
+        },
+        {
+            "label": "Build",
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "CMake",
+                "Ninja",
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}
